@@ -37,3 +37,16 @@ class RegisterForm(forms.Form):
         if password != confirm_password:
             raise forms.ValidationError("پسورد با تکرارش برابر نیست")
         return confirm_password
+
+class LoginForm(forms.Form):
+    username_or_email = forms.CharField(
+        max_length=100,
+        label='نام کاربری یا ایمیل',
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'نام کاربری یا ایمیل'})
+    )
+
+    password = forms.CharField(
+        max_length=100,
+        label='پسورد',
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'پسورد'})
+    )

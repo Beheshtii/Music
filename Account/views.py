@@ -21,7 +21,41 @@ class RegisterView(View):
             user.save()
 
             messages.success(request, 'با موفقیت ثبت نام شدید')
-            return redirect('Home')
+            return redirect('login')
 
         return render(request, 'Account/register.html', {'register_form': register_form})
+
+class LoginView(View):
+    def get(self, request):
+        login_form = LoginForm()
+        return render(request, 'Account/login.html', {'login_form': login_form})
+
+    def post(self, request):
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            uoe = login_form.cleaned_data.get('username_or_email')
+            password = login_form.cleaned_data.get('password')
+
+
+            if '@' in uoe:
+                user: User = User.objects.filter(gmail=uoe).first()
+            else:
+                user: User = User.objects.filter(username=uoe).first()
+
+            if user is None or not user.check_password(password):
+                messages.error(request, 'نام کاربری/ایمیل یا پسورد وارد شده اشتباه است')
+
+            else:
+                login(request, user)
+                messages.success(request, 'باموفقیت وارد شدید')
+                return redirect('home')
+
+        return render(request, 'Account/login.html', {'login_form': login_form})
+
+
+
+
+
+
+
 
