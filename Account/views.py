@@ -5,8 +5,11 @@ from .forms import *
 from .models import *
 from django.contrib import messages
 
+
 class RegisterView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('home')
         register_form = RegisterForm()
         return render(request, 'Account/register.html', {'register_form': register_form})
 
@@ -27,6 +30,8 @@ class RegisterView(View):
 
 class LoginView(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect('home')
         login_form = LoginForm()
         return render(request, 'Account/login.html', {'login_form': login_form})
 
@@ -51,6 +56,11 @@ class LoginView(View):
                 return redirect('home')
 
         return render(request, 'Account/login.html', {'login_form': login_form})
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('login')
 
 
 
