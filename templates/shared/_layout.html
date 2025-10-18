@@ -1,0 +1,130 @@
+<html dir="rtl" lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="Responsive, Bootstrap, BS4">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/libs/slick-carousel/slick/slick.css" type="text/css">
+    <link rel="stylesheet" href="/static/libs/slick-carousel/slick/slick-theme.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/theme.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/style.css" type="text/css">
+    {% block style %}{% endblock %}
+</head>
+<body class="layout-column bg-dark">
+<header id="header" class="page-header fixed">
+    <div class="navbar navbar-expand-lg">
+        <a href="{% url 'home' %}" class="navbar-brand text-white " data-pjax-state="">
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1" fill="#000"></circle>
+                <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1"></circle>
+                <g class="loading-spin" stroke="currentColor" stroke-width="1" style="transform-origin: 12px 12px">
+                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+                </g>
+            </svg>
+            <span class="hidden-folded d-inline l-s-n-1x ">کینگ موزیک</span></a>
+        <div class="collapse navbar-collapse order-2 order-lg-1" id="navbarCollapse">
+            <ul class="navbar-nav" data-nav="">
+                <li class="nav-item"><a href="http://themeforest.net/user/flatfull" class="nav-link" data-pjax-state=""><span
+                        class="nav-text">آن را دریافت کنید</span></a></li>
+                <li class="nav-item"><a href="/static/docs/" class="nav-link no-ajax"><span
+                        class="nav-text">مستندات</span></a></li>
+            </ul>
+        </div>
+        <ul class="nav navbar-menu order-1 order-lg-2">
+            {% if request.user.is_authenticated %}
+                     <li class="d-flex align-items-center"><a class="btn btn-rounded btn-sm btn-primary no-ajax" href="{% url 'logout' %}">خروج</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link no-ajax" href="{% url 'login' %}">وارد شوید</a></li>
+                    <li class="d-flex align-items-center"><a class="btn btn-rounded btn-sm btn-primary no-ajax" href="{% url 'register' %}">ثبت نام کنید</a></li>
+            {% endif %}
+            
+            <li class="nav-item d-lg-none"><a href="#" class="nav-link px-2" data-toggle="collapse" data-toggle-class="" data-target="#navbarCollapse" data-pjax-state="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-menu">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </a></li>
+        </ul>
+    </div>
+</header>
+{% block content %}{% endblock %}
+<footer id="footer" class="page-footer ">
+    <div class="padding bg-dark b-t">
+        <div class="page-container">
+            <div class="py-5 text-inherit text-hover-primary">
+                <div class="row mb-5">
+                    <div class="col-6 col-md-4">
+                        <div class="mb-3"><a href="index.html" class="navbar-brand text-white ">
+                            <svg width="48" height="48" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                 fill="none">
+                                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1"
+                                        fill="#000"></circle>
+                                <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1"></circle>
+                                <g class="loading-spin" stroke="currentColor" stroke-width="1"
+                                   style="transform-origin: 12px 12px">
+                                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+                                </g>
+                            </svg>
+                            <span class="hidden-folded d-inline l-s-n-1x ">کینگ موزیک</span></a></div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <h5 class="mb-3 text-muted">صفحات</h5>
+                        <ul class="list-unstyled l-h-2x text-highlight">
+                            <li><a href="/static/html/artists.html">هنرمندان</a></li>
+                            <li><a href="/static/html/charts.html">نمودارهای برتر</a></li>
+                            <li><a href="/static/html/genres.html">ژانرها</a></li>
+                            <li><a href="/static/html/page.about.html">درباره ما</a></li>
+                            <li><a href="/static/html/blog.html">وبلاگ</a></li>
+                            <li><a href="{% url 'login' %}">ورود به سیستم</a></li>
+                            <li><a href="{% url 'register' %}">ثبت نام کنید</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <h5 class="mb-3 text-muted">شما کینگ موزیک</h5>
+                        <ul class="list-unstyled l-h-2x text-highlight">
+                            <li><a href="/static/html/artist.detail.html">نمایه</a></li>
+                            <li><a href="/static/html/artist.detail.html#albums">آلبوم ها</a></li>
+                            <li><a href="/static/html/artist.detail.html#tracks">آهنگ ها</a></li>
+                            <li><a href="/static/html/artist.detail.html#playlist">لیست پخش</a></li>
+                            <li><a href="/static/html/artist.detail.html#liked">پسندید</a></li>
+                            <li><a href="/static/html/artist.detail.html#following">دنبال کردن</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <h5 class="mb-3 text-muted">کمک کنید</h5>
+                        <ul class="list-unstyled l-h-2x text-highlight">
+                            <li><a href="/static/docs">مستندات</a></li>
+                            <li><a href="/static/docs/changelog.html">تغییرات</a></li>
+                            <li><a href="/static/docs/changelog.html">به روز رسانی</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2 text-md-right">
+                        <h5 class="mb-3 text-muted">ما را دنبال کنید</h5>
+                        <a href="#">فیس بوک</a>
+                    </div>
+                </div>
+                <div class="text-center py-5"><span class="text-muted text-sm">© تمام اطلاعات نزد کینگ موزیک محفوظ است</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="/static/libs/jquery/dist/jquery.min.js"></script>
+<script src="/static/libs/popper.js/dist/umd/popper.min.js"></script>
+<script src="/static/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/libs/pjax/pjax.min.js"></script>
+<script src="/static/assets/js/ajax.js"></script>
+<script src="/static/assets/js/lazyload.config.js"></script>
+<script src="/static/assets/js/lazyload.js"></script>
+<script src="/static/assets/js/plugin.js"></script>
+<script src="/static/libs/scrollreveal/dist/scrollreveal.min.js"></script>
+<script src="/static/libs/slick-carousel/slick/slick.min.js"></script>
+<script src="/static/libs/feather-icons/dist/feather.min.js"></script>
+<script src="/static/assets/js/theme.js"></script>
+{% block script %}{% endblock %}
+</body>
+</html>
