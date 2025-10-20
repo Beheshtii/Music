@@ -28,11 +28,11 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
-    username = models.CharField(max_length=150, unique=True)
-    gmail = models.CharField(max_length=150, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
+    username = models.CharField(max_length=150, unique=True, verbose_name='نام کاربری')
+    gmail = models.CharField(max_length=150, unique=True, verbose_name='ایمیل')
+    is_active = models.BooleanField(default=True, verbose_name='فعال/غیرفعال')
+    is_staff = models.BooleanField(default=False, verbose_name='کارمند')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='تاریخ ایجاد')
 
     objects = UserManager()
 
@@ -44,3 +44,5 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     class Meta:
         db_table = 'user'
+        verbose_name = 'کاربر'
+        verbose_name_plural = 'کاربران'
